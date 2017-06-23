@@ -62,22 +62,28 @@ So, lets get your questions answered one by one.
 1. **Why aren't you using `pm2`?**
 
   Unfortunately, PM2 works by chosing a single user and running the commands under said user. Unfortunately, to access the GPIO pins, I need root privileges. So why not run `pm2` as root then? Well, you're then basically running everything on your mirror pi as root. You don't want to do that. Second of all, you'd need to reinstall everything in the root home folder. That makes it a little hard to install. It's a limitation upstream, so the best I can do is divert the problem elsewhere, hence using `systemd` instead.
+  
 2. **But other modules can use GPIO pins fine without root!**
 
   Yes, but that's because they're using a native implementation of accessing the GPIO pins. I'm using a python library.
+  
 3. **Python library? Why not just have everything native in js?**
 
   Two main reasons: First, the original library for the raspberry pi was written in Python. Second, I have no idea how to port libraries, especially for one that works on such a low level. I tried to understand the library, but it was pretty terribly documented. Hell, even their examples were pretty terrible. One variable is just named "`some_value`". No comment, no explaination. You needed to figure out that it was the initialization point for the air wheel gesture. 
+  
 4. **Is there anything else I should know?**
 
   Actually, yes. This module starts another separate websocket server. It runs locally, and only accepts messages if the message originate from the localhost. The python script runs a websocket client.
+  
 5. **Wait, why not just use the socket feature native to MagicMirror?**
 
   Let me quote the *entire* section about the native socketing implementation, detailing *everything* developers should know about it: 
 
 > This is a link to the IO instance. It will allow you to do some Socket.IO magic. In most cases you won't need this, since the Node Helper has a few convenience methods to make this simple.
 
-6. **What does this support
+6. **What does this support?**
+
+  For now, just the basics. This has integeration with MMM-pages, so swiping left and right changes the page you're on. More features to come later.
 
 
 ## Using the module
